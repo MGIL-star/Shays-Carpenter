@@ -1,0 +1,4 @@
+const fs=require('fs'),path=require('path');
+const sharp=require('C:/Users/ellag/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/sharp');
+const root=path.resolve(__dirname,'..');
+(async()=>{for(const file of fs.readdirSync(path.join(root,'edited')).filter(f=>f.endsWith('.png'))){await sharp(path.join(root,'edited',file)).resize({width:2000,height:2000,fit:'inside',withoutEnlargement:true}).webp({quality:88}).toFile(path.join(__dirname,'dist/assets',file.replace('.png','.webp')));}fs.copyFileSync(path.join(root,'video/VID-20260625-WA0053.mp4'),path.join(__dirname,'dist/assets/project-film.mp4'));const manifestPath=path.join(__dirname,'.openai/hosting.json');const manifest=JSON.parse(fs.readFileSync(manifestPath));manifest.static={directory:'dist'};fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2));console.log('Assets prepared:',fs.readdirSync(path.join(__dirname,'dist/assets')).length);})();
