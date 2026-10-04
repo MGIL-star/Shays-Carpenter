@@ -1,0 +1,14 @@
+[
+  {
+    "file": "cab40229-aac5-4df0-8a72-32b61eb965c2",
+    "prompt": "Use case: precise-object-edit. Edit target: attached original photo of white floor-to-ceiling corner wardrobes. Produce a faithful photographic retouch for a carpentry portfolio. Improve perceived sharpness and fine cabinet edges moderately, reduce noise and balance exposure subtly. Preserve exactly all doors, grooves, handles, corner geometry, ceiling lighting, air vent, flooring, perspective and framing. Natural realistic materials, no redesign, no added objects, no over-sharpening or artificial HDR."
+  },
+  {
+    "file": "20251023_175221",
+    "prompt": "Use case: precise-object-edit. Edit target: original restaurant kitchen photograph. Very restrained portfolio retouch. On the foreground right marble counter remove only a few distracting loose ingredient packages: the paper flour bag, egg cartons, crumpled white plastic bag and small disposable ingredient jar nearest foreground. Remove green shopping bag on left counter. Preserve most working utensils, bowls, food, appliances, cookware, shelves, jars, lamps, all joinery, cabinet doors and handles, marble textures, architecture, viewpoint and exact framing. Keep restaurant looking natural and in use, do not empty counters. Moderately improve photographic sharpness and noise, slight balanced exposure only, realistic professional photograph no redesign no HDR."
+  },
+  {
+    "file": "20181217_143015",
+    "prompt": "Use case: precise-object-edit. Edit target: original classic white domestic kitchen photo with central island and chairs. Sharpen and professionally polish the photograph subtly: moderate fine-detail clarity, reduce noise, balanced natural white tones and exposure. Preserve exact cabinetry, carved details, handles, counters, island, chairs, hood, appliances, decorative shelf and clock, all objects, viewpoint, framing and lighting mood. Do not redesign, add furniture or alter materials. Avoid excessive sharpening, halos and HDR. Faithful realistic photo retouch."
+  }
+]
