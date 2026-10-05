@@ -1,4 +1,5 @@
 const projects=[
+['IMG-20250704-WA0082','storage','ארון קיר עם מראות','חזיתות בגוון חם וידיות טבעת שחורות'],
 ['IMG-20250630-WA0111','kitchen','מטבח לבן קלאסי','חזיתות מסגרת ואי מרכזי'],
 ['IMG-20260326-WA0037','kitchen','מטבח בהיר עם ידיות זהב','נגרות מסגרת בתכנון אישי'],
 ['IMG-20250812-WA0063','kitchen','מטבח בקווים נקיים','חזיתות לבנות ואי בגוון אבן'],
@@ -34,4 +35,5 @@ const backgrounds=['IMG-20260326-WA0037','20251023_175221','IMG-20260403-WA0002'
 
 
 const films=[...document.querySelectorAll('.video-gallery video')];const filmObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.play().catch(()=>{});}else{e.target.pause();}}),{threshold:.25});films.forEach(v=>filmObserver.observe(v));
+
 
