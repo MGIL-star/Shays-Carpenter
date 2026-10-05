@@ -29,7 +29,6 @@ const projects=[
 ['IMG-20230212-WA0076','living','חיפוי פסים מקרוב','מפגש בין עץ למזנון כהה'],
 ['IMG-20260226-WA0151','living','קיר האח בשעות הערב','עץ ותאורה חמה'],
 ['IMG-20260403-WA0002','kitchen','נגרות גבוהה למטבח','ארונות ומשטח עבודה בגוונים טבעיים'],
-['IMG-20250812-WA0065','kitchen','מטבח ואי בגוון אבן','מבט על החלל'],
 ['IMG-20260625-WA0048','storage','פרטי חדר הארונות','מרקם עץ ותאורה פנימית'],
 ['IMG-20260625-WA0050','storage','חדר ארונות בהתאמה אישית','חלוקה מדויקת לאחסון'],
 ['cab40229-aac5-4df0-8a72-32b61eb965c2','storage','ארונות פינתיים עד התקרה','חזיתות בהירות וידיות שקועות'],
@@ -39,7 +38,6 @@ const projects=[
 ['IMG-20231116-WA0120','kitchen','מטבח כפרי עם אי עץ','חזיתות בהירות ומשטח עץ טבעי'],
 ['IMG-20251205-WA0022','living','קיר יין מואר במסעדה','נגרות עץ, זכוכית ותאורה חמה'],
 ['IMG-20251210-WA0067','kitchen','מטבח אפור בהיר','נגרות נקייה וידיות בגוון זהב'],
-['IMG-20260311-WA0123','kitchen','מטבח לבן עם ארונות בגוון בטון','אי רחב ופתרונות אחסון']
 ];
 const asset=p=>'assets/'+encodeURIComponent(p[0])+'.webp';let visible=projects,photoIndex=0;const gallery=document.querySelector('#gallery'),viewer=document.querySelector('#viewer');
 function showPhoto(i){photoIndex=(i+visible.length)%visible.length;const p=visible[photoIndex];document.querySelector('#full-photo').src=asset(p);document.querySelector('#full-photo').alt=p[2];document.querySelector('#photo-title').textContent=p[2];}

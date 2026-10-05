@@ -1,0 +1,10 @@
+const fs=require('fs'),vm=require('vm');
+let app=fs.readFileSync('dist/app.js','utf8');
+app=app.replace(/^\['IMG-20250812-WA0065'.*\r?\n/m,'').replace(/^\['IMG-20260311-WA0123'.*\r?\n/m,'');
+fs.writeFileSync('dist/app.js',app);
+fs.writeFileSync('dist/index.html',fs.readFileSync('dist/index.html','utf8').replace('app.js?v=psalm-mixer-final','app.js?v=gallery-pruned-final'));
+const prefix=app.split('const asset=')[0];
+const projects=vm.runInNewContext(prefix+';projects');
+if(projects.some(p=>['IMG-20250812-WA0065','IMG-20260311-WA0123'].includes(p[0])))throw Error('Old entries remain');
+if(!projects.some(p=>p[0]==='kitchen-05-psalm-mixer'))throw Error('Final image missing');
+console.log('Verified gallery entries:',projects.length);
