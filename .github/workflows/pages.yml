@@ -1,0 +1,42 @@
+name: Publish website to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apel-site/dist/**'
+      - '.github/workflows/pages.yml'
+      - '.github/scripts/validate-site.cjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Validate website files and relative URLs
+        run: node .github/scripts/validate-site.cjs
+      - name: Check JavaScript syntax
+        run: node --check apel-site/dist/app.js
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload only the finished website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apel-site/dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
