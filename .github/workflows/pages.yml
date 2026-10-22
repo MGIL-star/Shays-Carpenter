@@ -6,7 +6,7 @@ on:
     paths:
       - 'apel-site/dist/**'
       - '.github/workflows/pages.yml'
-      - '.github/scripts/validate-site.cjs'
+      - '.github/scripts/**'
   workflow_dispatch:
 
 permissions:
@@ -30,7 +30,11 @@ jobs:
       - name: Validate website files and relative URLs
         run: node .github/scripts/validate-site.cjs
       - name: Check JavaScript syntax
-        run: node --check apel-site/dist/app.js
+        run: |
+          node --check apel-site/dist/app.js
+          node --check apel-site/dist/counters.js
+      - name: Check shared counter behavior
+        run: node .github/scripts/test-counters.cjs
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload only the finished website
