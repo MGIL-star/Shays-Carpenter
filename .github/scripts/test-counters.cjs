@@ -12,16 +12,16 @@ function element(){return {dataset:{},isConnected:true,children:[],value:{textCo
  IntersectionObserver:class{constructor(cb){this.cb=cb;observers.push(this)}observe(){}unobserve(){}},
  fetch:async url=>{calls.push(url);if(fail)throw Error('offline');const parts=url.split('/'),op=parts.at(-2),key=decodeURIComponent(parts.at(-1));if(op==='hit')values.set(key,(values.get(key)||0)+1);return {status:values.has(key)?200:404,ok:values.has(key),json:async()=>({value:values.get(key)})}}
  };vm.runInNewContext(source,context);const counters=context.window.SiteCounters;
- const photo=counters.create('photo','test');await settle();observers[0].cb([{target:photo,isIntersecting:true}]);await settle();assert.equal(photo.value.textContent,'669 פתיחות');
- await counters.hit('photo','test');assert.equal(photo.value.textContent,'670 פתיחות');
- const duplicate=counters.create('photo','test');await settle();assert.equal(duplicate.value.textContent,'670 פתיחות');
+ const photo=counters.create('photo','test');await settle();observers[0].cb([{target:photo,isIntersecting:true}]);await settle();assert.equal(photo.value.textContent,'0 פתיחות');
+ await counters.hit('photo','test');assert.equal(photo.value.textContent,'1 פתיחות');
+ const duplicate=counters.create('photo','test');await settle();assert.equal(duplicate.value.textContent,'1 פתיחות');
  const before=calls.length;document.hidden=true;await counters.hit('photo','test');assert.equal(calls.length,before);document.hidden=false;
- fail=true;await counters.hit('photo','test');assert.equal(photo.value.textContent,'670 פתיחות');fail=false;
+ fail=true;await counters.hit('photo','test');assert.equal(photo.value.textContent,'1 פתיחות');fail=false;
  counters.init();await settle();observers[1].cb([{target:video,isIntersecting:true}]);
  for(let i=0;i<=8;i++){video.currentTime=i*.5;handlers.timeupdate()}await settle();await settle();
  assert.equal(calls.filter(u=>u.includes('/hit/')&&u.endsWith('video-test-video')).length,1);
  for(let i=9;i<=16;i++){video.currentTime=i*.5;handlers.timeupdate()}await settle();
  assert.equal(calls.filter(u=>u.includes('/hit/')&&u.endsWith('video-test-video')).length,1);
- assert.equal(caption.children[0].value.textContent,'670 צפיות');
- console.log('PASS counters: baseline, shared responses, hidden tabs, offline fallback, three-second video threshold and no repeat count.');
+ assert.equal(caption.children[0].value.textContent,'1 צפיות');
+ console.log('PASS counters: measured counts without offsets, shared responses, hidden tabs, offline fallback, three-second video threshold and no repeat count.');
 })();

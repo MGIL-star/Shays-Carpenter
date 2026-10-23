@@ -2,7 +2,6 @@
   'use strict';
   const API = 'https://countapi.mileshilliard.com/api/v1/';
   const PREFIX = 'mgil-star-shays-carpenter-1404868540-20261022-';
-  const BASELINE = 669;
   const enabled = location.hostname === 'mgil-star.github.io' && location.pathname.startsWith('/Shays-Carpenter/');
   const states = new Map();
   const formatter = new Intl.NumberFormat('he-IL');
@@ -15,7 +14,7 @@
   }
   function paint(state) {
     const label = state.kind === 'photo' ? 'פתיחות' : state.kind === 'video' ? 'צפיות' : 'ביקורים באתר';
-    const value = state.value === null ? '—' : formatter.format(state.value + (state.kind === 'site' ? 0 : BASELINE));
+    const value = state.value === null ? '—' : formatter.format(state.value);
     for (const element of state.elements) {
       if (!element.isConnected) { state.elements.delete(element); continue; }
       element.querySelector('.counter-value').textContent = value + ' ' + label;
@@ -49,7 +48,7 @@
     const element = document.createElement('small');
     element.className = kind === 'site' ? 'site-stat' : 'media-stat';
     element.dataset.counterKey = state.key;
-    element.title = kind === 'site' ? 'ביקורים מאז הפעלת המונה; לא מספר אנשים ייחודיים' : 'כולל ערך פתיחה של 669; הספירה נמדדת מאז 22.10.2026';
+    element.title = kind === 'site' ? 'ביקורים מאז הפעלת המונה; לא מספר אנשים ייחודיים' : 'פתיחות וצפיות שנמדדו בפועל מאז הפעלת המונה';
     element.innerHTML = eye + '<span class="counter-value">—</span>';
     state.elements.add(element);
     queueMicrotask(() => { paint(state); observer.observe(element); });
@@ -70,9 +69,7 @@
     const footer = document.querySelector('footer');
     const block = document.createElement('div');block.className = 'site-stat-block';
     block.append(create('site', 'visits'));
-    const note = document.createElement('small');note.className = 'counter-note';
-    note.textContent = 'מוני המדיה כוללים ערך פתיחה של 669. הספירה בפועל החלה ב־22.10.2026.';
-    block.append(note);footer.append(block);
+    footer.append(block);
     const visitKey = PREFIX + 'visit-session';
     if (enabled && !sessionHas(visitKey)) { sessionMark(visitKey); hit('site', 'visits'); }
     const visibility = new WeakMap();
