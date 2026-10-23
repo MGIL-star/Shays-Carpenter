@@ -66,12 +66,6 @@
   function sessionHas(key) { try { return sessionStorage.getItem(key) === '1'; } catch { return false; } }
   function sessionMark(key) { try { sessionStorage.setItem(key, '1'); } catch {} }
   function init() {
-    const footer = document.querySelector('footer');
-    const block = document.createElement('div');block.className = 'site-stat-block';
-    block.append(create('site', 'visits'));
-    footer.append(block);
-    const visitKey = PREFIX + 'visit-session';
-    if (enabled && !sessionHas(visitKey)) { sessionMark(visitKey); hit('site', 'visits'); }
     const visibility = new WeakMap();
     const videoObserver = new IntersectionObserver(entries => entries.forEach(entry => visibility.set(entry.target, entry.isIntersecting)), {threshold: .25});
     document.querySelectorAll('.video-gallery video').forEach(video => {
