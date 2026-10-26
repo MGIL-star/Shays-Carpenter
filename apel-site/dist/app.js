@@ -16,6 +16,7 @@ const projects=[
 ["20251023_175221","kitchen","נגרות למטבח מסעדה","תכנון לחלל עבודה מקצועי"],
 ["restaurant-dining-kitchen","kitchen","המסעדה · מבט מחלל האירוח","מטבח פתוח ונגרות בגוונים חמים"],
 ["IMG-20251205-WA0022","living","קיר יין מואר במסעדה","נגרות עץ, זכוכית ותאורה חמה"],
+["restaurant-wine-dining-evening","living","המסעדה · פינת אירוח וקיר יין","נגרות, אבן ותאורה חמה בשעות הערב"],
 ["photo-224050","kitchen","מטבח עם קלפה בגוון אגוז","משטח בהיר וידיות כהות"],
 ["photo-224057","storage","ויטרינת יין בתאורה פנימית","מדפי תצוגה ופינת קפה"],
 ["photo-224146","storage","פרטי יחידת היין","מרקם אגוז וזכוכית"],
@@ -34,7 +35,7 @@ const projects=[
 ["IMG-20250703-WA0023(1)","storage","פינת כניסה עם מראה מוארת","חיפוי עץ וקונסולה מרחפת"],
 ["entry-mirror-soft-light","storage","קונסולה מרחפת ומראה מוארת","תאורה היקפית עדינה ונגרות בגוון חם"],
 ];
-const asset=p=>'assets/'+encodeURIComponent(({'photo-222532-final':'photo-222532-even-light-cropped','photo-222551-final':'photo-222551-even-light','IMG-20260225-WA0134':'kitchen-vitrines-taj-mahal-clean','photo-222736':'kitchen-tv-fluted-clean'})[p[0]]||p[0])+'.webp';let visible=projects,photoIndex=0;const gallery=document.querySelector('#gallery'),viewer=document.querySelector('#viewer');
+const asset=p=>'assets/'+encodeURIComponent(({'photo-222532-final':'photo-222532-even-light-cropped','photo-222551-final':'photo-222551-even-light','IMG-20260225-WA0134':'kitchen-vitrines-taj-mahal-clean','photo-222736':'kitchen-tv-fluted-clean','IMG-20260403-WA0002':'kitchen-natural-green-view'})[p[0]]||p[0])+'.webp';let visible=projects,photoIndex=0;const gallery=document.querySelector('#gallery'),viewer=document.querySelector('#viewer');
 function showPhoto(i){photoIndex=(i+visible.length)%visible.length;const p=visible[photoIndex];document.querySelector('#full-photo').src=asset(p);document.querySelector('#full-photo').alt=p[2];document.querySelector('#photo-title').textContent=p[2];}
 function renderGallery(filter='all'){visible=projects.filter(p=>filter==='all'||p[1]===filter);gallery.replaceChildren(...visible.map((p,i)=>{const b=document.createElement('button');b.className='work-card';b.type='button';b.setAttribute('aria-label','פתיחת תמונה: '+p[2]);const img=document.createElement('img');img.src=asset(p);img.alt=p[2];img.loading='lazy';img.decoding='async';const title=document.createElement('span');title.textContent=p[2];const desc=document.createElement('small');desc.textContent=p[3];b.append(img,title,desc);b.addEventListener('click',()=>{showPhoto(i);viewer.showModal()});return b}));}
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b))});renderGallery(b.dataset.filter)}));renderGallery();
