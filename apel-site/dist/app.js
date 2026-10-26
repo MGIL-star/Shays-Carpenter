@@ -10,7 +10,7 @@ const projects=[
 ["20181217_143015","kitchen","מטבח קלאסי עם אי מרכזי","חזיתות מסגרת ופרטי נגרות מעוצבים"],
 ["IMG-20180913-WA0198","kitchen","מטבח קלאסי לבן מזווית נוספת","ארונות גבוהים ואי מרכזי"],
 ["IMG-20231116-WA0120","kitchen","מטבח כפרי עם אי עץ","חזיתות בהירות ומשטח עץ טבעי"],
-["IMG-20260225-WA0134","kitchen","מטבח עם ויטרינות מוארות","חזיתות בהירות, משטח כהה ותאורה חמה"],
+["IMG-20260225-WA0134","kitchen","מטבח עם ויטרינות מוארות","חזיתות בהירות, שיש טאג׳ מהל ותאורה חמה"],
 ["IMG-20260403-WA0002","kitchen","נגרות גבוהה למטבח","ארונות ומשטח עבודה בגוונים טבעיים"],
 ["IMG-20251210-WA0067","kitchen","מטבח אפור בהיר","נגרות נקייה וידיות בגוון זהב"],
 ["20251023_175221","kitchen","נגרות למטבח מסעדה","תכנון לחלל עבודה מקצועי"],
@@ -33,7 +33,7 @@ const projects=[
 ["IMG-20250703-WA0023(1)","storage","פינת כניסה עם מראה מוארת","חיפוי עץ וקונסולה מרחפת"],
 ["entry-mirror-soft-light","storage","קונסולה מרחפת ומראה מוארת","תאורה היקפית עדינה ונגרות בגוון חם"],
 ];
-const asset=p=>'assets/'+encodeURIComponent(({'photo-222532-final':'photo-222532-even-light-cropped','photo-222551-final':'photo-222551-even-light'})[p[0]]||p[0])+'.webp';let visible=projects,photoIndex=0;const gallery=document.querySelector('#gallery'),viewer=document.querySelector('#viewer');
+const asset=p=>'assets/'+encodeURIComponent(({'photo-222532-final':'photo-222532-even-light-cropped','photo-222551-final':'photo-222551-even-light','IMG-20260225-WA0134':'kitchen-vitrines-taj-mahal','photo-222736':'kitchen-tv-fluted-light'})[p[0]]||p[0])+'.webp';let visible=projects,photoIndex=0;const gallery=document.querySelector('#gallery'),viewer=document.querySelector('#viewer');
 function showPhoto(i){photoIndex=(i+visible.length)%visible.length;const p=visible[photoIndex];document.querySelector('#full-photo').src=asset(p);document.querySelector('#full-photo').alt=p[2];document.querySelector('#photo-title').textContent=p[2];}
 function renderGallery(filter='all'){visible=projects.filter(p=>filter==='all'||p[1]===filter);gallery.replaceChildren(...visible.map((p,i)=>{const b=document.createElement('button');b.className='work-card';b.type='button';b.setAttribute('aria-label','פתיחת תמונה: '+p[2]);const img=document.createElement('img');img.src=asset(p);img.alt=p[2];img.loading='lazy';img.decoding='async';const title=document.createElement('span');title.textContent=p[2];const desc=document.createElement('small');desc.textContent=p[3];b.append(img,title,desc);b.addEventListener('click',()=>{showPhoto(i);viewer.showModal()});return b}));}
 document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b))});renderGallery(b.dataset.filter)}));renderGallery();
