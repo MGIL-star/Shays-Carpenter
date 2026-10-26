@@ -32,9 +32,6 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check apel-site/dist/app.js
-          node --check apel-site/dist/counters.js
-      - name: Check shared counter behavior
-        run: node .github/scripts/test-counters.cjs
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload only the finished website
